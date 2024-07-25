@@ -1,9 +1,26 @@
-<?php 
+<?php
 
 declare(strict_types=1);
 
-require 'vendor/autoload.php';
+require "vendor/autoload.php";
 
-$routor = new Router();
+$router = new Router();
 
-if ($routor->isApi)
+if ($router->isApiCall()){
+    if ($_SERVER['REQUEST_METHOD'] == 'GET'){
+        if ($router->getREsourceTd()) {
+            echo 'Task' . $router->getResourceTd();
+            return;
+        }
+        echo 'all tasks';
+        return;
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        echo 'Add new recourse';
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] == 'PATCH') {
+        echo 'Resourse' . $router->getResourceTd().' updated';
+    }
+}
